@@ -7,7 +7,7 @@ import java.io.InputStream;
 import java.util.Optional;
 import java.util.Properties;
 
-public class DataSourceConfig {
+public class DataSourceConfig implements Config {
 
     private String username;
 
