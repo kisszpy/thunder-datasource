@@ -21,7 +21,7 @@ public class ThunderDataSource implements DataSource {
     public ThunderDataSource() {
         initialPool();
         ThunderThreadPool.create().scheduleAtFixedRate(new ConnectionPool.PoolMonitor(),
-                10000,1000, TimeUnit.MILLISECONDS);
+                10000, 1000, TimeUnit.MILLISECONDS);
     }
 
     public void release(Connection connection) {
@@ -29,10 +29,9 @@ public class ThunderDataSource implements DataSource {
     }
 
     private void initialPool() {
-        int initialSize = 16;
         this.pool = new ConnectionPool();
         try {
-            for (int i = 0;i<initialSize;i++) {
+            for (int i = 0; i < config.getInitialSize(); i++) {
                 Connection connection = DriverManager.getConnection(config.getUrl(),
                         config.getUsername(),
                         config.getPassword());
@@ -45,7 +44,7 @@ public class ThunderDataSource implements DataSource {
     }
 
     public Connection getConnection() throws SQLException {
-        return  pool.get();
+        return pool.get();
     }
 
     public Connection getConnection(String username, String password) throws SQLException {
@@ -53,7 +52,8 @@ public class ThunderDataSource implements DataSource {
     }
 
     public String getDataSourceInfo() {
-        return "连接情况:" + pool.size();
+        // todo 后续做扩展暂时先这样子
+        return "pool size is :" + pool.size();
     }
 
     public <T> T unwrap(Class<T> iface) throws SQLException {

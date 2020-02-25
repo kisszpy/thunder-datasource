@@ -5,4 +5,22 @@
 - 后续规划实现数据库操作功能（规划中）
     - 1.0.1 实现基本的增、删、改、查
     
-    
+# 使用说明
+   - 配置文件： classpath: jdbc.properties
+```text
+username=root
+password=root
+url=jdbc:mysql://localhost:3306/test
+driverClassName=com.mysql.jdbc.Driver
+# 数据库连接池参数（后续实现更多参数配置）
+initialSize=50
+maxActive=300
+```
+只需要两步就可以完成连接的获取，内部细节参考源码
+``` text
+// 创建对象
+ThunderDataSource dataSource = new ThunderDataSource();
+// 获取连接
+dataSource.getConnection();
+
+```    
