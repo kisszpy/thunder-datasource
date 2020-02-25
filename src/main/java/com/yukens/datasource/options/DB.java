@@ -22,6 +22,11 @@ public enum DB implements Option2 {
         return this;
     }
 
+    public <T> DB update(T o) {
+        System.out.println(sql(o,UPDATE));
+        return this;
+    }
+
 
 
 }

@@ -8,16 +8,27 @@ public class DBOptions {
 
     @Test
     public void dbInstance() {
-        for (int i = 0; i < 1000000; i++) {
+        for (int i = 0; i < 1; i++) {
             User user = new User();
             user.setAge(20);
             user.setBirthday("2021/01/11");
             user.setId(i+1);
             user.setName("李想"  + i);
             System.out.println(ReflectUtils.Object2Map(user));
+            System.out.println(ReflectUtils.getPrimaryKey(user));
         }
 
-//        DB.INSTANCE.save(user);
+    }
+
+    @Test
+    public void updateSql() {
+        User user = new User();
+        user.setAge(20);
+        user.setBirthday("2021/01/11");
+        user.setId(1);
+        user.setName("李想");
+
+        DB.INSTANCE.update(user);
     }
 
 }

@@ -22,4 +22,7 @@ public class Constant {
 
     public static final int MONITOR_WORK_CORE_SIZE = 5;
 
+
+    public static final String EMPTY_STRING = "";
+
 }
