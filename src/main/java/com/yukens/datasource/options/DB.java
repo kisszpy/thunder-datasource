@@ -4,7 +4,7 @@ import com.yukens.datasource.ThunderDataSource;
 
 import javax.sql.DataSource;
 
-public enum DB implements Option2 {
+public enum DB implements Option {
 
     INSTANCE;
 
