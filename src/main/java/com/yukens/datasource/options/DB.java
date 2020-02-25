@@ -1,10 +1,14 @@
 package com.yukens.datasource.options;
 
+import com.yukens.datasource.ThunderDataSource;
+
+import javax.sql.DataSource;
+
 public enum DB implements Option2 {
 
     INSTANCE;
 
-//    DataSource ds = new ThunderDataSource();
+    DataSource ds = new ThunderDataSource();
 
     Object target;
 
@@ -19,6 +23,7 @@ public enum DB implements Option2 {
 
     public <T> DB save(T o) {
         System.out.println(sql(o,INSERT));
+        String sql = sql(o,INSERT);
         return this;
     }
 

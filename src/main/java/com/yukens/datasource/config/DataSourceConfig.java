@@ -7,6 +7,8 @@ import java.io.InputStream;
 import java.util.Optional;
 import java.util.Properties;
 
+import static com.yukens.datasource.constant.Constant.CONFIG_FILE;
+
 public class DataSourceConfig implements Config {
 
     private String username;
@@ -66,18 +68,20 @@ public class DataSourceConfig implements Config {
     }
 
     private Properties loadResource() {
-        Properties properties = new Properties();
-        InputStream in = getClass().getClassLoader().getResourceAsStream(Constant.CONFIG_FILE);
-        Optional.ofNullable(in).orElseThrow(() -> {
-            return new RuntimeException("config file not found , please check your config (jdbc.properties)");
-        });
-        try {
-            properties.load(in);
-        } catch (IOException e) {
-            System.out.println("加载配置文件出错，请检查您的配置文件");
-            e.printStackTrace();
+        String filename = getClass().getClassLoader().getResource(CONFIG_FILE).getFile();
+        if (filename!=null) {
+            Properties properties = new Properties();
+            InputStream in = getClass().getClassLoader().getResourceAsStream(CONFIG_FILE);
+
+            try {
+                properties.load(in);
+            } catch (IOException e) {
+                System.out.println("加载配置文件出错，请检查您的配置文件");
+                e.printStackTrace();
+            }
+            return properties;
         }
-        return properties;
+        throw new RuntimeException("config file not found , please check your config (jdbc.properties)");
     }
 
     static class DataSourceConfigHolder {
