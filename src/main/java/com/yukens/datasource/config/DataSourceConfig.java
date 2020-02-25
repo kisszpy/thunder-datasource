@@ -1,25 +1,13 @@
 package com.yukens.datasource.config;
 
+import com.yukens.datasource.constant.Constant;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Optional;
 import java.util.Properties;
 
 public class DataSourceConfig {
-
-    protected static final String CONFIG_KEY_USERNAME = "username";
-
-    protected static final String CONFIG_KEY_PASSWORD = "password";
-
-    protected static final String CONFIG_KEY_URL = "url";
-
-    protected static final String CONFIG_KEY_DRIVER_CLASS_NAME = "driverClassName";
-
-    protected static final String CONFIG_KEY_POOL_INITIAL_SIZE = "initialSize";
-
-    protected static final String CONFIG_KEY_POOL_MAX_ACTIVE = "maxActive";
-
-    protected static final String CONFIG_FILE = "jdbc.properties";
 
     private String username;
 
@@ -59,12 +47,12 @@ public class DataSourceConfig {
 
     private DataSourceConfig() {
         Properties properties = loadResource();
-        username = properties.getProperty(CONFIG_KEY_USERNAME);
-        password = properties.getProperty(CONFIG_KEY_PASSWORD);
-        url = properties.getProperty(CONFIG_KEY_URL);
-        driverClassName = properties.getProperty(CONFIG_KEY_DRIVER_CLASS_NAME);
-        initialSize = properties.getProperty(CONFIG_KEY_POOL_INITIAL_SIZE) == null ? 8 : Integer.valueOf(properties.getProperty(CONFIG_KEY_POOL_INITIAL_SIZE));
-        maxActive = properties.getProperty(CONFIG_KEY_POOL_MAX_ACTIVE) == null ? 8 : Integer.valueOf(properties.getProperty(CONFIG_KEY_POOL_MAX_ACTIVE));
+        username = properties.getProperty(Constant.CONFIG_KEY_USERNAME);
+        password = properties.getProperty(Constant.CONFIG_KEY_PASSWORD);
+        url = properties.getProperty(Constant.CONFIG_KEY_URL);
+        driverClassName = properties.getProperty(Constant.CONFIG_KEY_DRIVER_CLASS_NAME);
+        initialSize = properties.getProperty(Constant.CONFIG_KEY_POOL_INITIAL_SIZE) == null ? 8 : Integer.valueOf(properties.getProperty(Constant.CONFIG_KEY_POOL_INITIAL_SIZE));
+        maxActive = properties.getProperty(Constant.CONFIG_KEY_POOL_MAX_ACTIVE) == null ? 8 : Integer.valueOf(properties.getProperty(Constant.CONFIG_KEY_POOL_MAX_ACTIVE));
 
         try {
             Class.forName(driverClassName);
@@ -79,7 +67,7 @@ public class DataSourceConfig {
 
     private Properties loadResource() {
         Properties properties = new Properties();
-        InputStream in = getClass().getClassLoader().getResourceAsStream(CONFIG_FILE);
+        InputStream in = getClass().getClassLoader().getResourceAsStream(Constant.CONFIG_FILE);
         Optional.ofNullable(in).orElseThrow(() -> {
             throw new RuntimeException("config file not found , please check your config (jdbc.properties)");
         });
