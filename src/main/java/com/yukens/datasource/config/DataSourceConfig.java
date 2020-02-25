@@ -2,6 +2,7 @@ package com.yukens.datasource.config;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Optional;
 import java.util.Properties;
 
 public class DataSourceConfig {
@@ -79,6 +80,9 @@ public class DataSourceConfig {
     private Properties loadResource() {
         Properties properties = new Properties();
         InputStream in = getClass().getClassLoader().getResourceAsStream(CONFIG_FILE);
+        Optional.ofNullable(in).orElseThrow(() -> {
+            throw new RuntimeException("config file not found , please check your config (jdbc.properties)");
+        });
         try {
             properties.load(in);
         } catch (IOException e) {
