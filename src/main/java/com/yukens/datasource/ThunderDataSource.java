@@ -1,7 +1,7 @@
 package com.yukens.datasource;
 
-import com.yukens.db.config.DataSourceConfig;
-import com.yukens.db.thread.ThunderThreadPool;
+import com.yukens.datasource.config.DataSourceConfig;
+import com.yukens.datasource.thread.ThunderThreadPool;
 
 import javax.sql.DataSource;
 import java.io.PrintWriter;
