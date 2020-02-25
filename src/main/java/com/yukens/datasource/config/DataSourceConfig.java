@@ -69,7 +69,7 @@ public class DataSourceConfig implements Config {
         Properties properties = new Properties();
         InputStream in = getClass().getClassLoader().getResourceAsStream(Constant.CONFIG_FILE);
         Optional.ofNullable(in).orElseThrow(() -> {
-            throw new RuntimeException("config file not found , please check your config (jdbc.properties)");
+            return new RuntimeException("config file not found , please check your config (jdbc.properties)");
         });
         try {
             properties.load(in);

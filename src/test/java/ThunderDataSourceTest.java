@@ -73,21 +73,5 @@ public class ThunderDataSourceTest {
         }
     }
 
-    private Future<ResultWrapper> scripts(ThunderDataSource dataSource, ExecutorService es) throws SQLException {
-        return es.submit(() -> {
-            try {
-                System.out.println(Thread.currentThread().getName() + ": 开始执行");
-                Connection connection = dataSource.getConnection();
-                ResultSet resultSet = connection.createStatement().executeQuery("select 1 from dual");
-                if (resultSet.next()) {
-                    System.out.println("内部执行" + resultSet.getInt(1));
-                }
-                System.out.println("fffffff");
-                return new ResultWrapper(resultSet, connection);
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            return null;
-        });
-    }
+
 }
